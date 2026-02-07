@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Love for ShreeSakhi</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* Heart cursor */
+body, * {
+    cursor: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>\
+    <text y='24' font-size='24'>❤️</text></svg>") 16 16, auto;
+}
+
+/* LEFT MESSAGE */
+.left-message {
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 380px;
+    font-size: 1.7em;
+    line-height: 1.6;
+    color: #ffd6e8;
+}
+
+/* RIGHT MESSAGE */
+.right-message {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #ffd6e8;
+}
+
+/* PHOTO STACK */
+.photo-stack {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 480px;
+}
+
+.photo {
+    position: absolute;
+    width: 340px;
+    height: 450px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 5px solid rgba(255,255,255,0.6);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    transition: transform 0.6s ease;
+}
+
+/* Slide DOWN animation */
+.slide-back {
+    animation: slideDown 1.5s ease forwards;
+}
+
+@keyframes slideDown {
+    to {
+        transform: translateY(260px) scale(0.75);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="left-message">
+	My dearest ShreeSakhi,<br><br>
+        Every heartbeat of mine whispers your name.
+        You are my peace, my happiness, my forever.
+        No matter where life takes us, my heart will
+        always choose you — today, tomorrow, always.
+</div>
+
+<div class="photo-stack" id="stack">
+    <img src="img1" class="photo">
+    <img src="img2" class="photo">
+    <img src="img3" class="photo">
+    <img src="img4" class="photo">
+    <img src="img5" class="photo">
+    <img src="img6" class="photo">
+    <img src="img7" class="photo">
+    <img src="img8" class="photo">
+    <img src="img9" class="photo">
+    <img src="img10" class="photo">
+    <img src="img11" class="photo">
+</div>
+
+<div class="right-message">
+    I love you ShreeSakhi❤️
+</div>
+
+<script>
+const stack = document.getElementById('stack');
+
+function layoutStack() {
+    const photos = [...stack.children];
+    photos.forEach((photo, i) => {
+        photo.style.zIndex = 100 - i;
+        photo.style.opacity = 1;
+        photo.style.transform =
+            `translate(${(Math.random()-0.5)*12}px,
+                       ${(Math.random()-0.5)*12}px)
+             rotate(${(Math.random()-0.5)*4}deg)
+             scale(${1 - i*0.03})`;
+    });
+}
+
+function cycleStack() {
+    const photos = [...stack.children];
+    const topPhoto = photos[0];
+
+    topPhoto.classList.add('slide-back');
+
+    setTimeout(() => {
+        topPhoto.classList.remove('slide-back');
+        topPhoto.style.opacity = 1;
+
+        // TRUE ROTATION
+        stack.removeChild(topPhoto);
+        stack.appendChild(topPhoto);
+
+        layoutStack();
+    }, 1500);
+}
+
+layoutStack();
+setInterval(cycleStack, 4000);
+</script>
+
+</body>
+</html>
